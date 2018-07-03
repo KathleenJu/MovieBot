@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/dotenv": "^4.0.3",
+    "@types/request": "^2.47.1",
     "typescript": "^2.9.2"
   },
   "dependencies": {
