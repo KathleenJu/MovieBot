@@ -1,0 +1,179 @@
+when this endpoint https://www.eventcinemas.co.nz/Cinemas/GetSessions?cinemaIds=505 is called
+{
+    "Success": true,
+    "Data": {
+        "CinemaIds": [
+            505
+        ],
+        "Movies": [],
+        "Dates": [],
+        "SelectedDate": (date when the api is called/datenow()),
+        "Genres": [],
+        "Experiences": [],
+        "Attributes":[]
+     }
+}
+
+        "Movies": [{
+        {
+                        "Id": 12401,
+                        "Name": "The Heart of Man",
+                        "Has3D": false,
+                        "HasGoldClass": false,
+                        "HasStandard": true,
+                        "MovieUrl": "/Movie/The-Heart-Of-A-Man",
+                        "Attributes": [
+                            "SPECEVENT",
+                            "NC"
+                        ],
+                        "Rating": "M",
+                        "RatingId": 53,
+                        "Policy": "Adult themes",
+                        "BannerText": null,
+                        "ReleasedAt": "2018-07-03T00:00:00",
+                        "RunningTime": 98,
+                        "Genres": "alternate content",
+                        "MainCast": null,
+                        "Synopsis": "The Heart of Man is a cinematic retelling of the Prodigal son story contrasted with the gritty and vulnerable true stories of people who've walked out of a moralistic and behavior-centric journey with God It’s a story inviting us to leave behind our broken, moralistic and religious way of thinking and relating to God and to others. Once we begin to know who God is (and as a result who we are), we have something to invite the world into. Freedom from performance. Freedom from managing our behavio",
+                        "DoNotDisplay": false,
+                        "ShowInRotator": false,
+                        "HideFromMovies": false,
+                        "HasTrailers": true,
+                        "Director": null,
+                        "FirstSession": "2018-07-04T10:40:00",
+                        "LastSession": "2018-07-04T18:35:00",
+                        "IsFeatured": false,
+                        "Trailers": [
+                            "3qJHd17RQeg"
+                        ],
+                        "MovieGenres": [
+                            {
+                                "Id": 81498,
+                                "Name": "Alternate Content"
+                            }
+                        ],
+                        "Experiences": [
+                            {
+                                "code": "Deluxe",
+                                "name": "Deluxe",
+                                "desc": "Deluxe",
+                                "doNotDisplay": false
+                            }
+                        ],
+                        "TicketsOnSale": null,
+                        "IsThreeD": false,
+                        "ForCinebuzz": false,
+                        "MovieCode": "HEART-OF-M",
+                        "Rank": 14,
+                        "HOCode": "HO00009788",
+                        "CinemaModels": [
+                            {
+                                "Id": 505,
+                                "Name": "Westgate",
+                                "Url": "Westgate",
+                                "IsOffline": false,
+                                "Has3d": false,
+                                "HasGoldClass": false,
+                                "HasStandard": true,
+                                "HasVmax": false,
+                                "Sessions": [
+                                    {
+                                        "Id": 992436,
+                                        "MovieId": 12401,
+                                        "ActualMovieId": 12401,
+                                        "MovieCode": "HEART-OF-M",
+                                        "CinemaId": 505,
+                                        "StartTime": "2018-07-04T10:40:00",
+                                        "StartTimeAest": "2018-07-04T08:40:00",
+                                        "ScreenType": "Std",
+                                        "Attributes": [
+                                            {
+                                                "Id": 50,
+                                                "Name": "Special Event",
+                                                "Code": "SPECEVENT",
+                                                "TypeId": 1,
+                                                "ShowOnSessionButton": false,
+                                                "AdditionalClass": "Special Event",
+                                                "DoNotDisplay": false
+                                            },
+                                            {
+                                                "Id": 21,
+                                                "Name": "No Complimentaries",
+                                                "Code": "NC",
+                                                "TypeId": 1,
+                                                "ShowOnSessionButton": false,
+                                                "AdditionalClass": null,
+                                                "DoNotDisplay": false
+                                            }
+                                        ],
+                                        "Is3d": false,
+                                        "NoFreeTicket": true,
+                                        "ScreenTypeId": 0,
+                                        "Code": 77166,
+                                        "SeatsAvailable": 134,
+                                        "PriceGroupId": 65824,
+                                        "SeatAllocation": true,
+                                        "ScreenName": "Cinema 5",
+                                        "ScreenId": 49,
+                                        "BookingUrl": "https://www.eventcinemas.co.nz/Ticketing/Order#sessionId=992436"
+                                    },
+                                    {
+                                        "Id": 992461,
+                                        "MovieId": 12401,
+                                        "ActualMovieId": 12401,
+                                        "MovieCode": "HEART-OF-M",
+                                        "CinemaId": 505,
+                                        "StartTime": "2018-07-04T18:30:00",
+                                        "StartTimeAest": "2018-07-04T16:30:00",
+                                        "ScreenType": "Std",
+                                        "Attributes": [
+                                            {
+                                                "Id": 50,
+                                                "Name": "Special Event",
+                                                "Code": "SPECEVENT",
+                                                "TypeId": 1,
+                                                "ShowOnSessionButton": false,
+                                                "AdditionalClass": "Special Event",
+                                                "DoNotDisplay": false
+                                            },
+                                            {
+                                                "Id": 21,
+                                                "Name": "No Complimentaries",
+                                                "Code": "NC",
+                                                "TypeId": 1,
+                                                "ShowOnSessionButton": false,
+                                                "AdditionalClass": null,
+                                                "DoNotDisplay": false
+                                            }
+                                        ],
+                                        "Is3d": false,
+                                        "NoFreeTicket": true,
+                                        "ScreenTypeId": 0,
+                                        "Code": 75196,
+                                        "SeatsAvailable": 128,
+                                        "PriceGroupId": 65824,
+                                        "SeatAllocation": true,
+                                        "ScreenName": "Cinema 5",
+                                        "ScreenId": 49,
+                                        "BookingUrl": "https://www.eventcinemas.co.nz/Ticketing/Order#sessionId=992461"
+                                    }
+                                ],
+                                "ScreenTypes": [],
+                                "KeyMessage": null
+                            }
+                        ],
+                        "CinemaIds": [
+                            503,
+                            504,
+                            505,
+                            507,
+                            508,
+                            509,
+                            513
+                        ],
+                        "Cinemas": "503,504,505,507,508,509,513",
+                        "HideFromComingSoon": false,
+                        "IsComingSoon": false,
+                        "AbsoluteId": 12401,
+                        "HideFromComingSoonSites": []
+                    }}]

@@ -1,20 +1,25 @@
-require('dotenv').config();
 import request = require("request");
 
-function getShowingNowMovies(){
-    let endpoint: string =
-        "https://www.eventcinemas.co.nz/Movies/GetNowShowing";
+function getShowingNowMovies() {
+    let showingNowURI: string = "https://www.eventcinemas.co.nz/Movies/GetNowShowing";
 
-    request(endpoint, (err: any,response: request.Response, body: any) => {
-        if (err)
+    request(showingNowURI, (err: any, response: request.Response, body: any) => {
+        if (err) {
             console.log(err);
+            throw Error("Request Failed");
+        }
         else {
             let data = JSON.parse(body);
-            let movie: string = data.Data.Movies[0].Name;
+            let movies = data.Data.Movies;
+            let message: string = 'Movies showing now:\n';
 
-            console.log(`Intent: ${movie}`);
+            for (let movieName of movies) {
+                message += movieName.Name + '\n';
+            }
+            console.log(message);
+            return message;
         }
-        });
+    })
 }
 
-getShowingNowMovies();
+export {getShowingNowMovies}

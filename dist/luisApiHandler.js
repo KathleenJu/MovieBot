@@ -15,7 +15,7 @@ var queryParams = {
     "staging": true,
     "q": null
 };
-function getIntent(utterance) {
+function getLuisAPI(utterance, callback) {
     var luisRequestURI = endpoint + luisAppId +
         '?' + querystring.stringify(queryParams) + utterance;
     request_1.default.get(luisRequestURI, {}, function (err, response, body) {
@@ -23,13 +23,23 @@ function getIntent(utterance) {
             console.log(err);
         else {
             var data = JSON.parse(body);
-            var intent = data.topScoringIntent.intent;
-            console.log("Query: " + data.query);
-            console.log("Intent: " + intent);
+            callback(null, data);
         }
     });
 }
-function getEntity() {
+function getIntent(utterance) {
+    getLuisAPI(utterance, function (err, body) {
+        if (err) {
+            return err;
+        }
+        else {
+            var intent = body.topScoringIntent.intent;
+            console.log("Query: " + body.query);
+            console.log("Intent: " + intent);
+            console.log("Entities: " + body.entities);
+            return intent;
+        }
+    });
 }
 getIntent('what movies are showing now?');
 getIntent('when is jurassic world showing in queen st?');
