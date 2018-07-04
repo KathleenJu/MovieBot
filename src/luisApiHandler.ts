@@ -12,7 +12,6 @@ let queryParams = {
     "subscription-key": process.env.LUIS_SUBSCRIPTION_KEY,
     "timezoneOffset": "0",
     "verbose": true,
-    "staging": true,
     "q": null
 };
 
@@ -22,8 +21,9 @@ function getLuisAPI(utterance: string, callback: Function) {
         '?' + querystring.stringify(queryParams) + utterance;
 
     request.get(luisRequestURI, {}, (err: any, response: request.Response, body: any) => {
-        if (err)
+        if (err) {
             console.log(err);
+        }
         else {
             let data = JSON.parse(body);
             callback(null, data);
@@ -31,21 +31,25 @@ function getLuisAPI(utterance: string, callback: Function) {
     });
 }
 
-function getIntent(utterance: string) {
+function getTopScoringIntent(utterance: string) {
+    var test;
     getLuisAPI(utterance, function (err: any, body: any): string {
-        if (err) {
+        if (err || body.statusCode == 401 || body.statusCode == 400) {
+            console.log("Request is denied, check your connectoin or subscription key.");
+            test = "failed";
             return err;
         }
         else {
             let intent: string = body.topScoringIntent.intent;
-
+            test = intent;
             console.log(`Query: ${body.query}`);
             console.log(`Intent: ${intent}`);
-            console.log(`Entities: ${body.entities}`);
             return intent;
         }
     });
+    return test;
 }
 
-getIntent('what movies are showing now?');
-getIntent('when is jurassic world showing in queen st?');
+getTopScoringIntent('what movies are showing now?');
+getTopScoringIntent('what time is incredibles 2 showing on queen street');
+export {getTopScoringIntent}

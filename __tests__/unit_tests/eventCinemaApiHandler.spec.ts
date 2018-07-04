@@ -1,6 +1,6 @@
 import {getShowingNowMovies} from "../../src/eventCinemaApiHandler";
 
-describe("Showing Now Movies", () => {
+describe("Event Cinema API Handler", () => {
     test("get all the movies showing today", () => {
 
         const actualShowingNowMovies = getShowingNowMovies();
@@ -27,6 +27,6 @@ describe("Showing Now Movies", () => {
             "Radff18: Die Neue Nationalgalerie\n" +
             "Radff18: Integral Man";
 
-    expect(actualShowingNowMovies).toBe("Incredibles 2");
+    expect(actualShowingNowMovies).toEqual(expectedShowingMovies);
     })
 });

@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var request = require("request");
+var request_1 = __importDefault(require("request"));
 function getEventCinemasApi(callback) {
     var showingNowURI = "https://www.eventcinemas.co.nz/Movies/GetNowShowing";
-    request.get(showingNowURI, {}, function (err, response, body) {
+    request_1.default.get(showingNowURI, {}, function (err, response, body) {
         if (err)
             console.log(err);
         else {
@@ -12,7 +15,6 @@ function getEventCinemasApi(callback) {
         }
     });
 }
-exports.getEventCinemasApi = getEventCinemasApi;
 function getShowingNowMovies() {
     getEventCinemasApi(function (err, body) {
         if (err) {

@@ -32,4 +32,4 @@ function getShowingNowMovies() {
 }
 
 getShowingNowMovies();
-export {getShowingNowMovies, getEventCinemasApi}
+export {getShowingNowMovies}
