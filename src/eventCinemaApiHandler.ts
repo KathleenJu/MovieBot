@@ -1,35 +1,17 @@
-import request from "request";
+import {requestAPI} from "./requestHandler";
 
-function getEventCinemasApi(callback: Function) {
+const getShowingNowMovies = async () => {
+
     let showingNowURI: string = "https://www.eventcinemas.co.nz/Movies/GetNowShowing";
 
-    request.get(showingNowURI, {}, (err: any, response: request.Response, body: any) => {
-        if (err)
-            console.log(err);
-        else {
-            let data = JSON.parse(body);
-            callback(null, data);
-        }
-    });
-}
+    let jsonResponse = await requestAPI(showingNowURI);
+    let jsonMovies = await jsonResponse.Data.Movies;
+    let moviesResult: string = 'Movies showing now:\n';
 
-function getShowingNowMovies() {
-    getEventCinemasApi(function (err: any, body: any): string {
-        if (err) {
-            return err;
-        }
-        else {
-            let movies = body.Data.Movies;
-            let message: string = 'Movies showing now:\n';
+    for (let movieName of jsonMovies) {
+        moviesResult += movieName.Name + '\n';
+    }
+    return moviesResult;
+};
 
-            for (let movieName of movies) {
-                message += movieName.Name + '\n';
-            }
-            console.log(message);
-            return message;
-        }
-    });
-}
-
-getShowingNowMovies();
 export {getShowingNowMovies}

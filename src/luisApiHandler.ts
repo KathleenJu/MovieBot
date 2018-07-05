@@ -1,5 +1,6 @@
+import {requestAPI} from "./requestHandler";
+
 require('dotenv').config();
-import fetch from "node-fetch";
 
 let querystring = require('querystring');
 
@@ -15,16 +16,26 @@ let queryParams = {
     "q": null
 };
 
-async function luisAPICall(luisRequestURI: string){
-    let response = await fetch(luisRequestURI);
-    return await response.json() ;
-}
-async function getTopScoringIntent(){
+const getTopScoringIntent = async (utterance: string) => {
     let luisRequestURI: string =
         endpoint + luisAppId +
-        '?' + querystring.stringify(queryParams) + 'what movies are showing now';
+        '?' + querystring.stringify(queryParams) + utterance;
 
-    return await luisAPICall(luisRequestURI);
+
+    let jsonResponse = await requestAPI(luisRequestURI);
+    let intent = jsonResponse.topScoringIntent.intent;
+    return intent;
 }
 
-export {getTopScoringIntent, luisAPICall}
+const getLocationEntity = async (utterance: string) => {
+    let luisRequestURI: string =
+        endpoint + luisAppId +
+        '?' + querystring.stringify(queryParams) + utterance;
+
+
+    let jsonResponse = await requestAPI(luisRequestURI);
+    let locationEntity = jsonResponse.entities[0].resolution.values[0];
+    return locationEntity;
+}
+
+export {getTopScoringIntent, getLocationEntity}

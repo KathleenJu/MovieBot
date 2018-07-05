@@ -34,48 +34,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-Object.defineProperty(exports, "__esModule", { value: true });
-var requestHandler_1 = require("./requestHandler");
-require('dotenv').config();
-var querystring = require('querystring');
-var endpoint = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/";
-var luisAppId = process.env.LUIS_APP_ID;
-var queryParams = {
-    "subscription-key": process.env.LUIS_SUBSCRIPTION_KEY,
-    "timezoneOffset": "0",
-    "verbose": true,
-    "q": null
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var getTopScoringIntent = function (utterance) { return __awaiter(_this, void 0, void 0, function () {
-    var luisRequestURI, jsonResponse, intent;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                luisRequestURI = endpoint + luisAppId +
-                    '?' + querystring.stringify(queryParams) + utterance;
-                return [4 /*yield*/, requestHandler_1.requestAPI(luisRequestURI)];
-            case 1:
-                jsonResponse = _a.sent();
-                intent = jsonResponse.topScoringIntent.intent;
-                return [2 /*return*/, intent];
-        }
+Object.defineProperty(exports, "__esModule", { value: true });
+var node_fetch_1 = __importDefault(require("node-fetch"));
+function requestAPI(uri) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, node_fetch_1.default(uri)];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2: return [2 /*return*/, _a.sent()];
+            }
+        });
     });
-}); };
-exports.getTopScoringIntent = getTopScoringIntent;
-var getLocationEntity = function (utterance) { return __awaiter(_this, void 0, void 0, function () {
-    var luisRequestURI, jsonResponse, locationEntity;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                luisRequestURI = endpoint + luisAppId +
-                    '?' + querystring.stringify(queryParams) + utterance;
-                return [4 /*yield*/, requestHandler_1.requestAPI(luisRequestURI)];
-            case 1:
-                jsonResponse = _a.sent();
-                locationEntity = jsonResponse.entities[0].resolution.values[0];
-                return [2 /*return*/, locationEntity];
-        }
-    });
-}); };
-exports.getLocationEntity = getLocationEntity;
+}
+exports.requestAPI = requestAPI;
