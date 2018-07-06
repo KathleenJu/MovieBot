@@ -1,4 +1,4 @@
-import { getTopScoringIntent, getLocationEntityValues , getMovieNameEntityValues, getDatetimeEntityValues} from "../../src/luisApiHandler";
+import { getTopScoringIntent, getLocationEntityValues , getMovieNameEntityValues, getDateEntityValues} from "../../src/luisApiHandler";
 
 describe("Luis API Handler", () => {
     test("get correct top scoring intent of an utterance",async () => {
@@ -41,10 +41,10 @@ describe("Luis API Handler", () => {
         expect(actualLocationEntity).toEqual( ["incredibles 2"]);
     });
 
-    test("get datetime value of an utterance", async () => {
+    test("get datetime value of a date with no year specified of an utterance", async () => {
 
         const utterance = "what time is jurassic world showing on st lukes on july 20?";
-        const actualLocationEntity = await getDatetimeEntityValues(utterance);
+        const actualLocationEntity = await getDateEntityValues(utterance);
 
         expect(actualLocationEntity).toEqual( ["2018-07-20"]);
     });
@@ -52,8 +52,9 @@ describe("Luis API Handler", () => {
     test("get datetime value of an utterance", async () => {
 
         const utterance = "what time is jurassic world showing on st lukes on today?";
-        const actualLocationEntity = await getDatetimeEntityValues(utterance);
+        const actualLocationEntity = await getDateEntityValues(utterance);
+        let dateToday = new Date().toISOString().slice(0, 10)
 
-        expect(actualLocationEntity).toEqual( ["2018-07-06"]);
+        expect(actualLocationEntity).toEqual([dateToday]) ;
     });
 });

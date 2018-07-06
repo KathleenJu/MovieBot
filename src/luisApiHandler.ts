@@ -57,7 +57,7 @@ const getMovieNameEntityValues = async (utterance: string) => {
     return movieNameEntityValues;
 };
 
-const getDatetimeEntityValues = async (utterance: string) => {
+const getDateEntityValues = async (utterance: string) => {
     let luisRequestURI: string =
         endpoint + luisAppId +
         '?' + querystring.stringify(queryParams) + utterance;
@@ -74,4 +74,4 @@ const getDatetimeEntityValues = async (utterance: string) => {
     return datetimeEntityValue;
 };
 
-export {getTopScoringIntent, getLocationEntityValues, getMovieNameEntityValues, getDatetimeEntityValues}
+export {getTopScoringIntent, getLocationEntityValues, getMovieNameEntityValues, getDateEntityValues}
