@@ -1,7 +1,7 @@
 import {getShowingNowMovies} from "../../src/eventCinemaApiHandler";
 
 describe("Event Cinema API Handler", () => {
-    test("get all the movies showing today", async () => {
+    xtest("get all the movies showing today", async () => {
 
         const actualShowingNowMovies = await getShowingNowMovies();
         const expectedShowingMovies = "Movies showing now:\n" +

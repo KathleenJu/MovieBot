@@ -1,4 +1,4 @@
-import { getTopScoringIntent, getLocationEntity} from "../../src/luisApiHandler";
+import { getTopScoringIntent, getLocationEntityValues , getMovieNameEntityValues, getDatetimeEntityValues} from "../../src/luisApiHandler";
 
 describe("Luis API Handler", () => {
     test("get correct top scoring intent of an utterance",async () => {
@@ -7,7 +7,7 @@ describe("Luis API Handler", () => {
         const actualIntent = await getTopScoringIntent(utterance);
 
         expect(actualIntent).toEqual("ShowingNow");
-    })
+    });
 
     test("get correct top scoring intent of an utterance", async () => {
 
@@ -15,13 +15,45 @@ describe("Luis API Handler", () => {
         const actualIntent = await getTopScoringIntent(utterance);
 
         expect(actualIntent).toEqual("GetMovieInfo");
-    })
+    });
 
-    test("get location entity of an utterance", async () => {
+    test("get location entity value of an utterance", async () => {
 
-        const utterance = "when is jurassic world showing in queen st?";
-        const actualLocationEntity = await getLocationEntity(utterance);
+        const utterance = "what time is movie showing on queen st today?";
+        const actualLocationEntity = await getLocationEntityValues(utterance);
 
-        expect(actualLocationEntity).toBe("queen street");
-    })
+        expect(actualLocationEntity).toEqual( ["queen street"]);
+    });
+
+    test("get all location entity values of an utterance", async () => {
+
+        const utterance = "what time is movie showing on queen st and st lukes today?";
+        const actualLocationEntity = await getLocationEntityValues(utterance);
+
+        expect(actualLocationEntity).toEqual( ["queen street", "st lukes"]);
+    });
+
+    test("get movie name value of an utterance", async () => {
+
+        const utterance = "what time is incredibles 2 showing today?";
+        const actualLocationEntity = await getMovieNameEntityValues(utterance);
+
+        expect(actualLocationEntity).toEqual( ["incredibles 2"]);
+    });
+
+    test("get datetime value of an utterance", async () => {
+
+        const utterance = "what time is jurassic world showing on st lukes on july 20?";
+        const actualLocationEntity = await getDatetimeEntityValues(utterance);
+
+        expect(actualLocationEntity).toEqual( ["2018-07-20"]);
+    });
+
+    test("get datetime value of an utterance", async () => {
+
+        const utterance = "what time is jurassic world showing on st lukes on today?";
+        const actualLocationEntity = await getDatetimeEntityValues(utterance);
+
+        expect(actualLocationEntity).toEqual( ["2018-07-06"]);
+    });
 });

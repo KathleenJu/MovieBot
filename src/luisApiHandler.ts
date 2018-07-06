@@ -27,15 +27,51 @@ const getTopScoringIntent = async (utterance: string) => {
     return intent;
 }
 
-const getLocationEntity = async (utterance: string) => {
+const getLocationEntityValues = async (utterance: string) => {
     let luisRequestURI: string =
         endpoint + luisAppId +
         '?' + querystring.stringify(queryParams) + utterance;
 
+    let jsonResponse = await requestAPI(luisRequestURI);
+    let locationEntityValues = jsonResponse.entities.filter( (entities: any) => {
+        return entities.type === 'Location';
+    }).map((locationEntities: any) => {
+        return locationEntities.resolution.values[0];
+    });
+
+    return locationEntityValues;
+};
+
+const getMovieNameEntityValues = async (utterance: string) => {
+    let luisRequestURI: string =
+        endpoint + luisAppId +
+        '?' + querystring.stringify(queryParams) + utterance;
 
     let jsonResponse = await requestAPI(luisRequestURI);
-    let locationEntity = jsonResponse.entities[0].resolution.values[0];
-    return locationEntity;
-}
+    let movieNameEntityValues = jsonResponse.entities.filter( (entities: any) => {
+        return entities.type === 'MovieName';
+    }).map((movieNameEntity: any) => {
+        return movieNameEntity.entity;
+    });
 
-export {getTopScoringIntent, getLocationEntity}
+    return movieNameEntityValues;
+};
+
+const getDatetimeEntityValues = async (utterance: string) => {
+    let luisRequestURI: string =
+        endpoint + luisAppId +
+        '?' + querystring.stringify(queryParams) + utterance;
+
+    let dt : any = new Date().getFullYear();
+    let jsonResponse = await requestAPI(luisRequestURI);
+    let datetimeEntityValue = jsonResponse.entities.filter( (entities: any) => {
+        return entities.type === 'builtin.datetimeV2.date';
+    }).map((datetimeEntity: any) => {
+        let entityValues = datetimeEntity.resolution.values;
+        return entityValues[entityValues.length - 1].value;
+    });
+
+    return datetimeEntityValue;
+};
+
+export {getTopScoringIntent, getLocationEntityValues, getMovieNameEntityValues, getDatetimeEntityValues}
