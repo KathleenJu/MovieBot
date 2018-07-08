@@ -53,7 +53,7 @@ describe("Luis API Handler", () => {
 
         const utterance = "what time is jurassic world showing on st lukes on today?";
         const actualLocationEntity = await getDateEntityValues(utterance);
-        let dateToday = new Date().toISOString().slice(0, 10)
+        const dateToday = new Date().toISOString().slice(0, 10);
 
         expect(actualLocationEntity).toEqual([dateToday]) ;
     });

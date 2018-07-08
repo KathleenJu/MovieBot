@@ -1,38 +1,46 @@
 import {requestAPI} from "./requestHandler";
-
-require('dotenv').config();
-
-let querystring = require('querystring');
+import querystring from 'querystring';
 
 let endpoint: string =
     "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/";
 
-let luisAppId = process.env.LUIS_APP_ID;
+let luisAppId: string = process.env.LUIS_APP_ID || "default";
 
-let queryParams = {
-    "subscription-key": process.env.LUIS_SUBSCRIPTION_KEY,
-    "timezoneOffset": "0",
-    "verbose": true,
-    "q": null
+interface ILuisQueryParams {
+    "subscription-key": string,
+    timezoneOffset: string,
+    verbose: boolean,
+    staging?: boolean
+    q: null
+}
+
+let subscriptionKey: string = process.env.LUIS_SUBSCRIPTION_KEY || "default";
+
+let queryParams: ILuisQueryParams = {
+    "subscription-key": subscriptionKey,
+    timezoneOffset: "0",
+    verbose: true,
+    q: null
+};
+
+const analyseUtterance = async(utterance: string) => {
+    let luisRequestURI: string =
+        endpoint + luisAppId +
+        '?' + querystring.stringify(queryParams) + utterance;
+
+
+    return await requestAPI(luisRequestURI);
 };
 
 const getTopScoringIntent = async (utterance: string) => {
-    let luisRequestURI: string =
-        endpoint + luisAppId +
-        '?' + querystring.stringify(queryParams) + utterance;
-
-
-    let jsonResponse = await requestAPI(luisRequestURI);
+    let jsonResponse = await analyseUtterance(utterance);
     let intent = jsonResponse.topScoringIntent.intent;
     return intent;
-}
+};
 
 const getLocationEntityValues = async (utterance: string) => {
-    let luisRequestURI: string =
-        endpoint + luisAppId +
-        '?' + querystring.stringify(queryParams) + utterance;
+    let jsonResponse = await analyseUtterance(utterance);
 
-    let jsonResponse = await requestAPI(luisRequestURI);
     let locationEntityValues = jsonResponse.entities.filter( (entities: any) => {
         return entities.type === 'Location';
     }).map((locationEntities: any) => {
@@ -43,11 +51,8 @@ const getLocationEntityValues = async (utterance: string) => {
 };
 
 const getMovieNameEntityValues = async (utterance: string) => {
-    let luisRequestURI: string =
-        endpoint + luisAppId +
-        '?' + querystring.stringify(queryParams) + utterance;
+    let jsonResponse = await analyseUtterance(utterance);
 
-    let jsonResponse = await requestAPI(luisRequestURI);
     let movieNameEntityValues = jsonResponse.entities.filter( (entities: any) => {
         return entities.type === 'MovieName';
     }).map((movieNameEntity: any) => {
@@ -58,12 +63,8 @@ const getMovieNameEntityValues = async (utterance: string) => {
 };
 
 const getDateEntityValues = async (utterance: string) => {
-    let luisRequestURI: string =
-        endpoint + luisAppId +
-        '?' + querystring.stringify(queryParams) + utterance;
+    let jsonResponse = await analyseUtterance(utterance);
 
-    let dt : any = new Date().getFullYear();
-    let jsonResponse = await requestAPI(luisRequestURI);
     let datetimeEntityValue = jsonResponse.entities.filter( (entities: any) => {
         return entities.type === 'builtin.datetimeV2.date';
     }).map((datetimeEntity: any) => {
