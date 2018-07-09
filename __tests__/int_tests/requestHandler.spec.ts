@@ -1,8 +1,7 @@
 import {requestAPI} from "../../src/requestHandler";
 
 describe("API Call Handler", () => {
-    const Validator = require('jsonschema').Validator;
-    test("validate json result", async () => {
+    test("validate json result from Event Cinema api call for showing now movies", async () => {
 
         const validate = require('jsonschema').validate;
         const schema = {
@@ -11,7 +10,7 @@ describe("API Call Handler", () => {
             "definitions": {},
             "$schema": "http://json-schema.org/draft-07/schema#",
             "properties": {
-                "Success": {
+                "Success":  {
                     "$id": "/properties/Success",
                     "type": "boolean",
                     "title": "The Success Schema ",
@@ -552,7 +551,6 @@ describe("API Call Handler", () => {
         const uri = "https://www.eventcinemas.co.nz/Movies/GetNowShowing";
         const actualIntent = await requestAPI(uri);
         const result = validate(actualIntent, schema).valid;
-        console.log(validate(actualIntent, schema));
         expect(result).toBe(true);
     });
 });
