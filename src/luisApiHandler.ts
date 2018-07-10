@@ -28,13 +28,11 @@ const analyseUtterance = async(utterance: string) => {
         endpoint + luisAppId +
         '?' + querystring.stringify(queryParams) + utterance;
 
-
     return await requestAPI(luisRequestURI);
 };
 
 const getTopScoringIntent = async (utterance: string) => {
     let jsonResponse = await analyseUtterance(utterance);
-    console.log(jsonResponse);
     let intent = jsonResponse.topScoringIntent.intent;
     return intent;
 };

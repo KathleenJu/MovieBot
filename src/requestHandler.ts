@@ -5,7 +5,6 @@ import request from "request-promise";
 
 const requestAPI = async (uri: string) => {
     let response = await request.get(uri);
-    console.log(response);
     return JSON.parse(response);
 };
 

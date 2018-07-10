@@ -549,8 +549,9 @@ describe("API Call Handler", () => {
             }
         };
         const uri = "https://www.eventcinemas.co.nz/Movies/GetNowShowing";
-        const actualIntent = await requestAPI(uri);
-        const result = validate(actualIntent, schema).valid;
+        const instance = await requestAPI(uri);
+        const result = validate(instance, schema).valid;
+
         expect(result).toBe(true);
     });
 });
