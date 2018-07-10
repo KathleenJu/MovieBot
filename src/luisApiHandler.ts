@@ -34,6 +34,7 @@ const analyseUtterance = async(utterance: string) => {
 
 const getTopScoringIntent = async (utterance: string) => {
     let jsonResponse = await analyseUtterance(utterance);
+    console.log(jsonResponse);
     let intent = jsonResponse.topScoringIntent.intent;
     return intent;
 };

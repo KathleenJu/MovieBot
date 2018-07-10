@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config jest.unit.config.js",
+    "coverage": "jest --config jest.unit.config.js --coverage",
     "start": "node src/app.js"
   },
   "author": "",
@@ -14,6 +15,7 @@
     "@types/jest": "^23.1.4",
     "@types/node-fetch": "^2.1.1",
     "@types/request": "^2.47.1",
+    "@types/request-promise": "^4.1.41",
     "ts-jest": "^23.0.0",
     "typescript": "^2.9.2"
   },

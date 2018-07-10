@@ -1,4 +1,4 @@
-miust be generic so if I add hoyts api, the app is still able to run
+must be generic so if I add hoyts api, the app is still able to run
 movieInfo -> every instance must have movieName, time and location optional, interface or class (what is the difference in typescript)
 luisComponent -> query, topscoringintent, entities
 user.. -> movieinfo, luiscomponent?
