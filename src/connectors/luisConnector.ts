@@ -1,4 +1,6 @@
+import {APIConnector} from "./APIConnector";
 import {requestAPI} from "./requestHandler";
+import * as querystring from "querystring";
 
 interface ILuisQueryParams {
     "subscription-key": string,
@@ -8,31 +10,67 @@ interface ILuisQueryParams {
     q: null
 }
 
-class LuisConnector{
-    endpoint: string;
-    luisAppId: string;
-    luisQueryParams: ILuisQueryParams;
-    utterance : string;
+class LuisConnector extends APIConnector {
+    private endpoint: string;
+    private luisAppId: string;
+    private luisQueryParams: ILuisQueryParams;
 
-    constructor(endpoint: string,  luisAppId: string,  luisQueryParams: ILuisQueryParams, utterance: string){
+
+    constructor(endpoint: string, luisAppId: string, luisQueryParams: ILuisQueryParams) {
+        super(endpoint);
         this.endpoint = endpoint;
         this.luisAppId = luisAppId;
         this.luisQueryParams = luisQueryParams;
-        this.utterance = utterance;
     }
+
+    async analyseUtterance(utterance: string) {
+        let luisRequestURI: string = this.luisAppId + '?' + querystring.stringify(this.luisQueryParams) + utterance;
+
+        return await requestAPI(luisRequestURI);
+    };
+
+    async getTopScoringIntent(utterance: string) {
+        let jsonResponse = await this.analyseUtterance(utterance);
+        let intent = jsonResponse.topScoringIntent.intent;
+        return intent;
+    };
+
+    async getLocationEntityValues(utterance: string) {
+        let jsonResponse = await this.analyseUtterance(utterance);
+
+        let locationEntityValues = jsonResponse.entities.filter((entities: any) => {
+            return entities.type === 'Location';
+        }).map((locationEntities: any) => {
+            return locationEntities.resolution.values[0];
+        });
+
+        return locationEntityValues;
+    };
+
+    async getMovieNameEntityValues(utterance: string) {
+        let jsonResponse = await this.analyseUtterance(utterance);
+
+        let movieNameEntityValues = jsonResponse.entities.filter((entities: any) => {
+            return entities.type === 'MovieName';
+        }).map((movieNameEntity: any) => {
+            return movieNameEntity.entity;
+        });
+
+        return movieNameEntityValues;
+    };
+
+    async getDateEntityValues(utterance: string) {
+        let jsonResponse = await this.analyseUtterance(utterance);
+
+        let datetimeEntityValue = jsonResponse.entities.filter((entities: any) => {
+            return entities.type === 'builtin.datetimeV2.date';
+        }).map((datetimeEntity: any) => {
+            let entityValues = datetimeEntity.resolution.values;
+            return entityValues[entityValues.length - 1].value;
+        });
+
+        return datetimeEntityValue;
+    };
 }
-// let subscriptionKey: string = process.env.LUIS_SUBSCRIPTION_KEY || "default";
-// let queryParams: ILuisQueryParams = {
-//     "subscription-key": subscriptionKey,
-//     timezoneOffset: "0",
-//     verbose: true,
-//     q: null
-// };
-// const foo = new LuisConnector();
-// const analyseUtterance = async(utterance: string) => {
-//     let luisRequestURI: string =
-//         endpoint + luisAppId +
-//         '?' + querystring.stringify(queryParams) + utterance;
-//
-//     return await requestAPI(luisRequestURI);
-// };
+
+export {LuisConnector}
