@@ -1,13 +1,13 @@
 import request from "request-promise";
 
-class APIConnector {
-    private uri: string;
-    constructor(uri: string){
-        this.uri = uri;
+abstract class APIConnector {
+    protected endpoint: string;
+    constructor(endpoint: string){
+        this.endpoint = endpoint;
     }
 
     async requestAPI (path: string) {
-        let response = await request.get(this.uri + path);
+        let response = await request.get(this.endpoint + path);
         return JSON.parse(response);
     };
 

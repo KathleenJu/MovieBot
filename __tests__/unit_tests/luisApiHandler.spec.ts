@@ -4,8 +4,8 @@ import {
     getMovieNameEntityValues,
     getDateEntityValues
 } from "../../src/luisApiHandler";
+// import {LuisConnector} from "../../src/connectors/luisConnector";
 import request from "request-promise";
-
 
 describe("Luis API Handler", () => {
 
