@@ -1,4 +1,4 @@
-import {requestAPI} from "../../src/requestHandler";
+import {requestAPI} from "../../src/connectors/requestHandler";
 
 describe("API Call Handler", () => {
     test("validate json result from Event Cinema api call for showing now movies", async () => {

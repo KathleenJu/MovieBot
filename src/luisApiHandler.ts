@@ -1,5 +1,5 @@
-import {requestAPI} from "./requestHandler";
-import querystring from 'querystring';
+import {requestAPI} from "./connectors/requestHandler";
+import querystring from "querystring";
 
 let endpoint: string =
     "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/";
