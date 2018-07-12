@@ -1,6 +1,7 @@
 import request from "request-promise";
 import {luisResult, movieSession} from "../../src/luisApiHandler";
 import {showingNowJSONResponse, jsonResponseWithAllEntityTypes, jsonResponseWithTwoValuesOfSameEntity} from "../../mockData/luisJsonResponse";
+import {IMovieSession} from "../../src/interfaces/IMovieSession";
 
 describe("Luis API Handler", () => {
     test("get correct top scoring intent of an utterance", async () => {
@@ -10,6 +11,32 @@ describe("Luis API Handler", () => {
 
         expect(actualIntent).toEqual("ShowingNow");
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // xdescribe("For an utterance with a one movie name, date and location entity value", () => {
     //     const utterance = "when is jurassic world showing in queen st today?";

@@ -9,6 +9,7 @@ class LuisParser {
         return intent;
     };
 
+    //check if location, movieName, or date are null
     async getLocationEntityValues() {
         let locationEntityValues = this.jsonResponse.entities.filter((entities: any) => {
             return entities.type === 'Location';

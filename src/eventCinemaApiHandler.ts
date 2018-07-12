@@ -1,6 +1,6 @@
-const foo = (intent: string, cinemaId: Int8Array, date: Date ) => {
+const foo = (intent: string, cinemaId: Int8Array, date: Date) => {
     let path = "";
-    if (intent === "ShowingNow"){
+    if (intent === "ShowingNow") {
         path = "/Movies/GetShowingNow"
     }
     else if (intent === "GetMovieInfo") {
@@ -8,3 +8,5 @@ const foo = (intent: string, cinemaId: Int8Array, date: Date ) => {
         path = "/Cinemas/GetSessions?cinemaIds=" + cinemaId + "&date=" + date;
     }
 };
+
+export {foo}

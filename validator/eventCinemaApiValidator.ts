@@ -1,5 +1,5 @@
 import validate from "validate.js";
-import {showingNowMoviesAPI} from "../src/eventCinemaApiHandler";
+// import {showingNowMoviesAPI} from "../src/eventCinemaApiHandler";
 import {jsonMovies} from "../eventCinemaApiResult";
 //receives api from event cinema
 

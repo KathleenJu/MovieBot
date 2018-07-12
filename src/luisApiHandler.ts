@@ -24,7 +24,7 @@ let parser = new LuisParser(result);
 let intent = parser.getTopScoringIntent();
 
 let movieName = parser.getMovieNameEntityValues();
-let location = parser.getTopScoringIntent();
+let location = parser.getLocationEntityValues();
 let date = parser.getDateEntityValues();
 
 const movieSession = async () => {
