@@ -1,13 +1,7 @@
 import {APIConnector} from "./APIConnector";
 import * as querystring from "querystring";
+import {ILuisQueryParams} from "../interfaces/ILuisQueryParams";
 
-interface ILuisQueryParams {
-    "subscription-key": string,
-    timezoneOffset: string,
-    verbose: boolean,
-    staging?: boolean
-    q: null
-}
 
 class LuisConnector extends APIConnector {
     private luisAppId: string;
