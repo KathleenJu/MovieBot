@@ -10,7 +10,6 @@ abstract class APIConnector {
         let response = await request.get(this.endpoint + path);
         return JSON.parse(response);
     };
-
 }
 
 export {APIConnector}

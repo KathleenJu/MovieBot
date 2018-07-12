@@ -5,6 +5,7 @@ class LuisParser {
     }
 
     async getTopScoringIntent() {
+        console.log("test", await this.jsonResponse);
         let intent = this.jsonResponse.topScoringIntent.intent;
         return intent;
     };
