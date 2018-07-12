@@ -3,14 +3,14 @@ import {luisResult, movieSession} from "../../src/luisApiHandler";
 import {showingNowJSONResponse, jsonResponseWithAllEntityTypes, jsonResponseWithTwoValuesOfSameEntity} from "../../mockData/luisJsonResponse";
 import {IMovieSession} from "../../src/interfaces/IMovieSession";
 
-describe("Luis API Handler", () => {
-    test("get correct top scoring intent of an utterance", async () => {
-
-        spyOn(request, "get").and.returnValue(Promise.resolve(JSON.stringify(showingNowJSONResponse)));
-        const actualIntent = await luisResult();
-
-        expect(actualIntent).toEqual("ShowingNow");
-    });
+// describe("Luis API Handler", () => {
+    // xtest("get correct top scoring intent of an utterance", async () => {
+    //
+    //     spyOn(request, "get").and.returnValue(Promise.resolve(JSON.stringify(showingNowJSONResponse)));
+    //     const actualIntent = await luisResult();
+    //
+    //     expect(actualIntent).toEqual("ShowingNow");
+    // });
 
 
 
@@ -94,4 +94,4 @@ describe("Luis API Handler", () => {
     //         expect(actualLocationEntity).toEqual(["2018-07-20"]);
     //     });
     // });
-});
+// });

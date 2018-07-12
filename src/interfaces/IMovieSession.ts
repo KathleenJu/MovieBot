@@ -1,5 +1,5 @@
 export interface IMovieSession {
-    MovieName?: string;
+    MovieName: string;
     Cinema?: string;
     Date?: Date;
 }

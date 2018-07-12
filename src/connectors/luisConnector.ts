@@ -16,8 +16,8 @@ class LuisConnector extends APIConnector {
     }
 
     async analyseUtterance(utterance: string) {
-        let luisRequestURI: string = this.luisAppId + '?' + querystring.stringify(this.luisQueryParams) + utterance;
-        return await this.requestAPI(luisRequestURI);
+        let luisRequestPath: string = this.luisAppId + '?' + querystring.stringify(this.luisQueryParams) + utterance;
+        return await this.requestAPI(luisRequestPath);
     };
 }
 

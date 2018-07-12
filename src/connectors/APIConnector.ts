@@ -8,7 +8,7 @@ abstract class APIConnector {
 
     async requestAPI (path: string) {
         let response = await request.get(this.endpoint + path);
-        return JSON.parse(response);
+        return response;
     };
 }
 
