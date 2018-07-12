@@ -7,7 +7,6 @@ class LuisConnector extends APIConnector {
     private luisAppId: string;
     private luisQueryParams: ILuisQueryParams;
 
-
     constructor(endpoint: string, luisAppId: string, luisQueryParams: ILuisQueryParams) {
         super(endpoint);
         this.endpoint = endpoint;

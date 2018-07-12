@@ -5,8 +5,8 @@ import {showingNowJSONResponse} from "../../mockData/luisJsonResponse";
 
 describe("API Connector", () => {
     test("Luis API Connector async test", async () => {
-        let subscriptionKey: string = "test";
-        let queryParams: ILuisQueryParams = {
+        const subscriptionKey: string = "test";
+        const queryParams: ILuisQueryParams = {
             "subscription-key": subscriptionKey,
             "timezoneOffset": "0",
             "verbose": true,
