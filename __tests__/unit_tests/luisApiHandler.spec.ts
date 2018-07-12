@@ -1,14 +1,12 @@
 import request from "request-promise";
-import {LuisParser} from "../../src/luisParser";
-import {foo} from "../../src/luisApiHandler";
+import {luisResult, movieSession} from "../../src/luisApiHandler";
 import {showingNowJSONResponse, jsonResponseWithAllEntityTypes, jsonResponseWithTwoValuesOfSameEntity} from "../../mockData/luisJsonResponse";
 
 describe("Luis API Handler", () => {
     test("get correct top scoring intent of an utterance", async () => {
 
         spyOn(request, "get").and.returnValue(Promise.resolve(JSON.stringify(showingNowJSONResponse)));
-        // const foo = new LuisParser(showingNowJSONResponse);
-        const actualIntent = await foo();
+        const actualIntent = await luisResult();
 
         expect(actualIntent).toEqual("ShowingNow");
     });
