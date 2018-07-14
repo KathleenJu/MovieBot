@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
 
-function movieHandler(req, res) {
-    let question = req.query.question;
-    res.send(`Hello, ${question}`);
+function movieHandler(request, response) {
+    let question = request.query.question;
+    response.send(`Hello, ${question}`);
 }
-
 app.get('/movie', movieHandler);
 
 /**

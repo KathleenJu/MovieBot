@@ -15,23 +15,36 @@ let queryParams: ILuisQueryParams = {
 let luisConnector = new LuisConnector(endpoint, luisAppId, queryParams);
 
 const luisResult = async () => {
-    let result = await luisConnector.analyseUtterance("When is incredibles 2 showing today at queen st?");
-    return result;
+    try {
+        let result = await luisConnector.analyseUtterance("When is incredibles 2 showing today at queen st?");
+        return result;
+    }
+    catch (err) {
+        return "error";
+    }
 };
 
 let result = luisResult();
 let parser = new LuisParser(result);
 let intent = parser.getTopScoringIntent();
 
-let movieName = parser.getMovieNameEntityValues();
-let location = parser.getLocationEntityValues();
-let date = parser.getDateEntityValues();
-
-const movieSession = async () => {
-    let luisResult: IMovieSession = {MovieName: await movieName, Cinema: await location, Date: await date};
-    return luisResult;
+let getResponse = (intent : string) => {
+    if(intent === "Greeting"){
+        return "Hello";
+    }else{
+        return "some other intent";
+    }
 };
 
-export {luisResult, movieSession}
+// let movieName = parser.getMovieNameEntityValues();
+// let location = parser.getLocationEntityValues();
+// let date = parser.getDateEntityValues();
+//
+// const movieSession = async () => {
+//     let luisResult: IMovieSession = {MovieName: await movieName, Cinema: await location, Date: await date};
+//     return luisResult;
+// };
+
+export {luisResult}
 
 
