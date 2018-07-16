@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --config jest.unit.config.js",
     "coverage": "jest --config jest.unit.config.js --coverage",
-    "start": "node src/app.js"
+    "start": "tsc; node dist/app.js"
   },
   "author": "",
   "license": "ISC",

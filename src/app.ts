@@ -3,14 +3,13 @@ import {luisResult} from "./luisAPIHandler";
 const express = require('express');
 const app = express();
 
-function movieHandler(req: Request, res: Response) {
+async function movieHandler(req: Request, res: Response) {
     let question = req.query.question;
-    res.send(`Hello, ${question}`);
+    let result = await luisResult(question);
+    res.send(result);
 }
 
-// const apiHandler = new apiHandler();
-
-// app.get('/movie', apiHandler.getMovie);
+app.get('/movie', movieHandler);
 
 /**
  * "/movie?question=wherexx"

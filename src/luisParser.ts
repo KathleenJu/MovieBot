@@ -4,13 +4,13 @@ class LuisParser {
         this.jsonResponse = jsonResponse;
     }
 
-    async getTopScoringIntent() {
+    getTopScoringIntent() {
         let intent = this.jsonResponse.topScoringIntent.intent;
         return intent;
     };
 
     //check if location, movieName, or date are null
-    async getLocationEntityValues() {
+    getLocationEntityValues() {
         let locationEntityValues = this.jsonResponse.entities.filter((entities: any) => {
             return entities.type === 'Location';
         }).map((locationEntities: any) => {
@@ -20,7 +20,7 @@ class LuisParser {
         return locationEntityValues;
     };
 
-    async getMovieNameEntityValues() {
+    getMovieNameEntityValues() {
         let movieNameEntityValues = this.jsonResponse.entities.filter((entities: any) => {
             return entities.type === 'MovieName';
         }).map((movieNameEntity: any) => {
@@ -30,7 +30,7 @@ class LuisParser {
         return movieNameEntityValues;
     };
 
-    async getDateEntityValues() {
+    getDateEntityValues() {
         let datetimeEntityValue = this.jsonResponse.entities.filter((entities: any) => {
             return entities.type === 'builtin.datetimeV2.date';
         }).map((datetimeEntity: any) => {
